@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using players_catalog.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Dodanie polaczenia z baza
+builder.Services.AddDbContext<DataContext>(x => x.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnetcion")));
 
 var app = builder.Build();
 
