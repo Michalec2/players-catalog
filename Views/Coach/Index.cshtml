@@ -1,0 +1,25 @@
+@model List<players_catalog.Models.CoachViewModel>
+
+<h2 class="text-center my-4">Lista Trenerów</h2>
+
+<table class="table table-hover table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Imię</th>
+            <th>Doświadczenie (lata)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var coach in Model)
+        {
+            <tr>
+                <td>@coach.Id</td>
+                <td>@coach.Name</td>
+                <td>@coach.ExperienceYears</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/Coach/Create" class="btn btn-success mt-3">Dodaj Trenera</a>

@@ -1,0 +1,21 @@
+@model players_catalog.Models.CoachFormModel
+
+<h2 class="text-center my-4">Dodaj Trenera</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group mb-3">
+        <label for="Name" class="form-label">Imię</label>
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Podaj imię trenera" })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="ExperienceYears" class="form-label">Doświadczenie (lata)</label>
+        @Html.TextBoxFor(m => m.ExperienceYears, new { @class = "form-control", @type = "number", min = 1, max = 100, @placeholder = "Liczba lat doświadczenia" })
+    </div>
+
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary">Zapisz</button>
+    </div>
+}
