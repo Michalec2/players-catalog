@@ -1,0 +1,40 @@
+@model List<players_catalog.Models.PlayerViewModel>
+
+<h2 class="text-center my-4">Lista Piłkarzy</h2>
+
+<table class="table table-hover table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Imię</th>
+            <th>Wiek</th>
+            <th>Pozycja</th>
+            <th>Zespół</th>
+            @if (Context.Session.GetString("userName") != null)
+            {
+                <th>Akcje</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var player in Model)
+        {
+            <tr>
+                <td>@player.Id</td>
+                <td>@player.Name</td>
+                <td>@player.Age</td>
+                <td>@player.Position</td>
+                <td>@player.TeamName</td>
+                @if (Context.Session.GetString("userName") != null)
+                {
+                    <td>
+                        <a href="@Url.Action("Edit", "Player", new { id = player.Id })" class="btn btn-warning btn-sm">Edytuj</a>
+                        <a href="/Player/Delete/@player.Id" class="btn btn-danger btn-sm" onclick="return confirm('Czy na pewno chcesz usunąć?')">Usuń</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/Player/Create" class="btn btn-success mt-3">Dodaj Piłkarza</a>
