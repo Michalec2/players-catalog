@@ -23,3 +23,27 @@
 </table>
 
 <a href="/Team/Create" class="btn btn-success mt-3">Dodaj Zespół</a>
+
+<h2 class="text-center my-4">Lista Rozgrywek</h2>
+
+<table class="table table-hover table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nazwa Rozgrywek</th>
+            <th>Region</th>
+            <th>Start Sezonu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var competition in Model.FirstOrDefault()?.CompetitionsModel?.competitions ?? new List<Competition>())
+        {
+            <tr>
+                <td>@competition.id</td>
+                <td>@competition.name</td>
+                <td>@competition.area?.name</td>
+                <td>@competition.currentSeason?.startDate</td>
+            </tr>
+        }
+    </tbody>
+</table>

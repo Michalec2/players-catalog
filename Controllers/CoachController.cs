@@ -6,6 +6,7 @@ using players_catalog.Models;
 
 namespace players_catalog.Controllers
 {
+    [Route("[controller]")]
     public class CoachController : Controller
     {
         public DataContext DataContext { get; set; }
@@ -14,6 +15,7 @@ namespace players_catalog.Controllers
             DataContext = dataContext;
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
             List<Coach> coaches = DataContext.Coaches.ToList();
@@ -30,6 +32,7 @@ namespace players_catalog.Controllers
             return View(coachViewModels);
         }
 
+        [HttpGet("Create")]
         public ActionResult Create()
         {
             CoachFormModel model = new CoachFormModel
@@ -40,7 +43,7 @@ namespace players_catalog.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public ActionResult Create(CoachFormModel coachFormModel)
         {
             if (ModelState.IsValid)

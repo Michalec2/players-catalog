@@ -6,5 +6,7 @@
         public string Name { get; set; }
 
         public string CoachName { get; set; }
+
+        public CompetitionsModel CompetitionsModel { get; set; }
     }
 }

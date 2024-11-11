@@ -1,5 +1,3 @@
-using System.Linq;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using players_catalog.Data;
@@ -8,6 +6,7 @@ using players_catalog.Models;
 
 namespace players_catalog.Controllers
 {
+    [Route("[controller]")]
     public class PlayerController : Controller
     {
         public DataContext DataContext { get; set; }
@@ -17,6 +16,7 @@ namespace players_catalog.Controllers
             DataContext = dataContext;
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
             List<Player> players = DataContext.Players.Include(x => x.Team).ToList();
@@ -35,6 +35,7 @@ namespace players_catalog.Controllers
             return View(playerViewModels);
         }
 
+        [HttpGet("Create")]
         public ActionResult Create()
         {
             ViewBag.Teams = DataContext.Teams.ToList();
@@ -47,7 +48,7 @@ namespace players_catalog.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public ActionResult Create(PlayerFormModel playerFormModel)
         {
             if (ModelState.IsValid)
@@ -68,6 +69,7 @@ namespace players_catalog.Controllers
             return Create();
         }
 
+        [HttpGet("Edit")]
         public ActionResult Edit(int id)
         {
             ViewBag.Teams = DataContext.Teams.ToList();
@@ -86,7 +88,7 @@ namespace players_catalog.Controllers
             return View(playerFormModel);
         }
 
-        [HttpPost]
+        [HttpPost("Edit")]
         public ActionResult Edit(int id, PlayerFormModel playerFormModel)
         {
             Player player = DataContext.Players.Find(id);
@@ -106,6 +108,7 @@ namespace players_catalog.Controllers
             return Edit(id);
         }
 
+        [HttpGet("Delete/{id}")]
         public ActionResult Delete(int id)
         {
             Player player = DataContext.Players.Find(id);

@@ -6,6 +6,7 @@ using players_catalog.Models;
 
 namespace players_catalog.Controllers
 {
+    [Route("[controller]")]
     public class LoginController : Controller
     {
         private readonly DataContext DataContext;
@@ -15,13 +16,13 @@ namespace players_catalog.Controllers
             DataContext = context;
         }
 
-        [HttpGet]
+        [HttpGet("Register")]
         public IActionResult Register()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("Register")]
         public IActionResult Register(RegisterLoginViewModel model)
         {
             if(!ModelState.IsValid)
@@ -46,13 +47,13 @@ namespace players_catalog.Controllers
             return RedirectToAction("Login");
         }
 
-        [HttpGet]
+        [HttpGet("Login")]
         public IActionResult Login()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("Login")]
         public IActionResult Login(RegisterLoginViewModel model)
         {
             if (!ModelState.IsValid)
@@ -69,7 +70,8 @@ namespace players_catalog.Controllers
             HttpContext.Session.SetString("userName", model.Username);
             return RedirectToAction("Index", "Player");
         }
-
+    
+        [HttpGet("Logout")]
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("userName");
